@@ -24,6 +24,7 @@ public class LockScreenService extends Service {
         receiver = new LockScreenBroadcastReceiver();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_SCREEN_ON);
         registerReceiver(receiver, filter);
     }
 
@@ -48,11 +49,13 @@ public class LockScreenService extends Service {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (TextUtils.equals(intent.getAction(), Intent.ACTION_SCREEN_OFF)) {
+            if (TextUtils.equals(intent.getAction(), Intent.ACTION_SCREEN_ON)) {
                 Log.i(TAG, "onReceive: 收到锁屏广播");
                 Intent lockScreen = new Intent(LockScreenService.this, LockScreenActivity.class);
                 lockScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(lockScreen);
+            } else if (TextUtils.equals(intent.getAction(), Intent.ACTION_SCREEN_OFF)) {
+                Log.i(TAG, "onReceive: 收到解锁广播");
             }
         }
     }
