@@ -16,6 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".LockScreenActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:taskAffinity="com.example.xiaweizi.lockscreendemo" />
+
+        <service
+            android:name=".LockScreenService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>
